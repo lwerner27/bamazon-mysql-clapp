@@ -40,6 +40,8 @@ function setupApp() {
             console.log(`ID: ${id} Name: ${name} Department: ${department} Price: ${price} Stock: ${stock}`)
             console.log("")
         }
+
+        initialPrompt()
         
     })
 }
