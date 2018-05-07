@@ -9,5 +9,5 @@ I have also included MySQL scripts so that you can replicate my tables if you wa
 Note: You will have to provide your own database password.
 
 Here are some examples of each application working: 
-1. bamazonCustomer.js
+1. [bamazonCustomer.js](https://drive.google.com/open?id=1Tj9H6UbCQ62BuFptpLWWS0ZbbKGbbqtY)
 2. bamazonManager.js
