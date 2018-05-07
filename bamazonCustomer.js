@@ -63,6 +63,8 @@ function initialPrompt() {
         connection.query(`SELECT * FROM products WHERE item_id=${res.item_id}`, (err, response) => {
             if (err) throw err 
 
+            let itemID = response[0].item_id
+
             let newQuantity = parseInt(response[0].stock_quantity) - parseInt(res.quantity)
             let price = parseFloat(response[0].price)
             let total = price * parseInt(res.quantity)
@@ -72,6 +74,7 @@ function initialPrompt() {
                 console.log("Sorry we do not have enough in stock to fulfill that order, try again at another time.")
                 connection.end()
             } else {
+                updateSales(itemID, total)
                 updateStock(newQuantity, res.item_id)
                 console.log(`Your total is: ${total}`)
             }
@@ -86,5 +89,24 @@ function updateStock(updatedAmount, id) {
         if (err) throw err
         connection.end()
     })
+}
+
+function updateSales(id, sales) {
+
+    connection.query(`SELECT * FROM products WHERE item_id=${id}`, (err, res) => {
+
+        if (err) throw err
+
+        let newSalesTotal = parseFloat(res[0].product_sales) + sales
+
+        connection.query(`UPDATE products SET ? WHERE item_id=${id}`, {product_sales: newSalesTotal}, (err, res) => {
+
+            if (err) throw err
+
+        })
+
+
+    })
+
 }
 
